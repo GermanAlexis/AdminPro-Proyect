@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
+import { GraphicsComponent } from './graphics/graphics.component';
 
 
 
@@ -13,8 +14,10 @@ const pagesroutes: Routes = [
       children: [
              { path: '', component: DashboardComponent,
                data: { title: 'Dashboard' } },
-            { path: 'progressbar', component: ProgressbarComponent ,
-              data: { title: 'Dashboard' }}
+             { path: 'progressbar', component: ProgressbarComponent ,
+              data: { title: 'Progreso' }},
+             { path: 'graphics', component: GraphicsComponent ,
+              data: { title: 'Graficas' }}
          ]}
 ];
 
