@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { GraphicsComponent } from './graphics/graphics.component';
+import { AccountSettingComponent } from '../components/accountSetting/account-setting.component';
 
 
 
@@ -17,7 +18,9 @@ const pagesroutes: Routes = [
              { path: 'progressbar', component: ProgressbarComponent ,
               data: { title: 'Progreso' }},
              { path: 'graphics', component: GraphicsComponent ,
-              data: { title: 'Graficas' }}
+              data: { title: 'Graficas' }},
+             { path: 'accountsetting', component: AccountSettingComponent ,
+              data: { title: 'Ajuste de Usuario' }}
          ]}
 ];
 

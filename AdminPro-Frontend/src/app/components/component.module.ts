@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { ChartsModule } from 'ng2-charts';
 
 import { IncrementComponent } from './increment/increment.component';
-import { FormsModule } from '@angular/forms';
 import { DoughnutComponent } from './doughnut/doughnut.component';
+import { AccountSettingComponent } from './accountSetting/account-setting.component';
 
 
 
 @NgModule({
   declarations: [
     IncrementComponent,
-    DoughnutComponent ],
+    DoughnutComponent,
+    AccountSettingComponent ],
   exports: [
       IncrementComponent,
-      DoughnutComponent
+      DoughnutComponent,
+      AccountSettingComponent
     ],
   imports: [
     CommonModule,
