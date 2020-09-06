@@ -12,6 +12,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { GraphicsComponent } from './graphics/graphics.component';
+import { PromiseComponent } from './promise/promise.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { GraphicsComponent } from './graphics/graphics.component';
     PagesComponent,
     ProgressbarComponent,
     GraphicsComponent,
+    PromiseComponent,
+    RxjsComponent,
   ],
   imports: [
     CommonModule,

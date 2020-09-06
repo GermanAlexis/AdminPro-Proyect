@@ -6,6 +6,8 @@ import { PagesComponent } from './pages.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { GraphicsComponent } from './graphics/graphics.component';
 import { AccountSettingComponent } from '../components/accountSetting/account-setting.component';
+import { PromiseComponent } from './promise/promise.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 
@@ -20,7 +22,11 @@ const pagesroutes: Routes = [
              { path: 'graphics', component: GraphicsComponent ,
               data: { title: 'Graficas' }},
              { path: 'accountsetting', component: AccountSettingComponent ,
-              data: { title: 'Ajuste de Usuario' }}
+              data: { title: 'Ajuste de Usuario' }},
+              { path: 'promise', component: PromiseComponent ,
+              data: { title: 'Promesas', descritiondata: 'Hola Promesas' }},
+              { path: 'rxjs', component: RxjsComponent ,
+              data: { title: 'Rxjs' }}
          ]}
 ];
 
