@@ -4,7 +4,7 @@ const { dbconnetion } = require('./database/config')
 const app = express()
 
 // middware for read and parse from body
-app.use(express.json)
+app.use(express.json);
 dbconnetion();
 
 // Rotes
