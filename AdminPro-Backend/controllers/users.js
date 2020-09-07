@@ -8,11 +8,12 @@ const getUsers = ( req, res ) => {
 }
 
 const createUser = async ( req, res ) => {
-     const { name, lastNam, email, password } = req.body
+     const { name, lastName, email, password } = req.body
 
-    //  const user = new User(req.body)
+     const user = new User(req.body)
     console.log(req.body);
     await user.save();
+
     res.json({
         Ok: true,
         user
