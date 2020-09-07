@@ -16,17 +16,17 @@ const pagesroutes: Routes = [
       component: PagesComponent,
       children: [
              { path: '', component: DashboardComponent,
-               data: { title: 'Dashboard' } },
+               data: { title: 'Dashboard', description: 'PAGINA PRINCIPAL ' } },
              { path: 'progressbar', component: ProgressbarComponent ,
-              data: { title: 'Progreso' }},
+              data: { title: 'Progreso' , description: 'BARRAS DE PROGRESOS'}},
              { path: 'graphics', component: GraphicsComponent ,
-              data: { title: 'Graficas' }},
+              data: { title: 'Graficas', description: 'GRAFICAS DONAS' }},
              { path: 'accountsetting', component: AccountSettingComponent ,
-              data: { title: 'Ajuste de Usuario' }},
+              data: { title: 'Ajuste de Usuario', description: 'CAMBIAR COLORES' }},
               { path: 'promise', component: PromiseComponent ,
-              data: { title: 'Promesas', descritiondata: 'Hola Promesas' }},
+              data: { title: 'Promesas', description: 'USOS DE PROMESAS ' }},
               { path: 'rxjs', component: RxjsComponent ,
-              data: { title: 'Rxjs' }}
+              data: { title: 'Rxjs', description: 'APLICACIONES DE RXJS' }}
          ]}
 ];
 
