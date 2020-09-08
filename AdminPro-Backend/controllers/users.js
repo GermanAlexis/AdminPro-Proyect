@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const { generatorJWT } = require('../helpers/jwt');
 const getUsers = async (req, res) => {
   const users = await User.find({}, 'name lastName email google');
   res.json({
@@ -22,14 +23,16 @@ const createUser = async (req, res) => {
     }
 
     const user = new User(req.body);
+    const token = await generatorJWT(user.id);
     const salt = bcrypt.genSaltSync();
     user.password = bcrypt.hashSync(password, salt);
     await user.save();
 
-    res.json({
+    res.status(200).json({
       Ok: true,
       mgs: 'User Created',
       user,
+      token: token,
     });
   } catch (error) {
     console.log(error);

@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const { generatorJWT } = require('../helpers/jwt');
 
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -19,10 +20,12 @@ const login = async (req, res) => {
         msg: 'Algo no coincide, revisar password',
       });
     }
+
+    const token = await generatorJWT(userBD.id);
     res.status(200).json({
       ok: true,
       msg: 'Login Exitoso',
-      userBD,
+      token: token,
     });
   } catch (error) {
     console.log(error);
