@@ -7,10 +7,11 @@ const {
   deleteUser,
 } = require('../controllers/users');
 const { validateCampus } = require('../middlewares/validate-campus');
+const { validateJWT } = require('../middlewares/validate-jwt');
 
 const router = Router();
 
-router.get('/', getUsers);
+router.get('/', validateJWT, getUsers);
 router.post(
   '/',
   [

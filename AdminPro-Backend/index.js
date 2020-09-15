@@ -10,8 +10,10 @@ app.use(express.urlencoded({ extended: false }));
 dbconnetion();
 
 // Rotes
+app.use('/api/hospitals', require('./routes/hospitals'));
+app.use('/api/medics', require('./routes/medics'));
 app.use('/api/login', require('./routes/login'));
-app.use('/api/user', require('./routes/users'));
+app.use('/api/users', require('./routes/users'));
 
 app.listen(process.env.PORT, () => {
   console.log(

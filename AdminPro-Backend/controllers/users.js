@@ -1,12 +1,19 @@
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 const { generatorJWT } = require('../helpers/jwt');
+
 const getUsers = async (req, res) => {
-  const users = await User.find({}, 'name lastName email google');
+  const desde = Number(req.query.desde) || 0;
+
+  const users = await User.find({}, 'name lastName email google')
+    .skip(desde)
+    .limit(5);
+  const total = await User.count();
   res.json({
     Ok: true,
     mgs: 'All User',
     users,
+    total,
   });
 };
 
@@ -28,7 +35,7 @@ const createUser = async (req, res) => {
     user.password = bcrypt.hashSync(password, salt);
     await user.save();
 
-    res.status(200).json({
+    res.status(201).json({
       Ok: true,
       mgs: 'User Created',
       user,
