@@ -5,10 +5,11 @@ const { generatorJWT } = require('../helpers/jwt');
 const getUsers = async (req, res) => {
   const desde = Number(req.query.desde) || 0;
 
-  const users = await User.find({}, 'name lastName email google')
-    .skip(desde)
-    .limit(5);
-  const total = await User.count();
+  const [users, total] = await Promise.all([
+    User.find({}, 'name lastName email google').skip(desde).limit(5),
+    User.count(),
+  ]);
+
   res.json({
     Ok: true,
     mgs: 'All User',
