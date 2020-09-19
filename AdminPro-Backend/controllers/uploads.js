@@ -1,6 +1,7 @@
 const { updateImage } = require('../helpers/updateImage');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
+const fs = require('fs');
 
 const uploadFile = (req, res) => {
   const colection = req.params.colection;
@@ -60,8 +61,12 @@ const downFile = (req, res) => {
   const picture = req.params.picture;
 
   const pathImg = path.join(__dirname, `../uploads/${colection}/${picture}`);
-
-  res.sendFile(pathImg);
+  if (fs.existsSync(pathImg)) {
+    res.sendFile(pathImg);
+  } else {
+    const pathImg = path.join(__dirname, `../uploads/no-img.jpg`);
+    res.sendFile(pathImg);
+  }
 };
 
 module.exports = {
