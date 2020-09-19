@@ -1,5 +1,6 @@
 const { updateImage } = require('../helpers/updateImage');
 const { v4: uuidv4 } = require('uuid');
+const path = require('path');
 
 const uploadFile = (req, res) => {
   const colection = req.params.colection;
@@ -54,6 +55,16 @@ const uploadFile = (req, res) => {
   });
 };
 
+const downFile = (req, res) => {
+  const colection = req.params.colection;
+  const picture = req.params.picture;
+
+  const pathImg = path.join(__dirname, `../uploads/${colection}/${picture}`);
+
+  res.sendFile(pathImg);
+};
+
 module.exports = {
   uploadFile,
+  downFile,
 };
