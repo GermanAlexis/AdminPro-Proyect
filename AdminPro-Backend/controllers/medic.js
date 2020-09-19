@@ -9,7 +9,7 @@ const getMedics = async (req, res) => {
       .populate('user', 'name img')
       .skip(desde)
       .limit(5),
-    Medic.count(),
+    Medic.countDocuments(),
   ]);
 
   res.json({
