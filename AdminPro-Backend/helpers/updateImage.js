@@ -13,8 +13,12 @@ const updateImage = async (id, rename, colection) => {
   switch (colection) {
     case 'medics':
       const medic = await Medic.findById(id);
+
+      console.log(medic);
+      console.log(rename);
       if (!medic) {
         console.log('no existe medico con es id');
+        removeImage(`./uploads/medics/${rename}`);
         return false;
       }
       pathold = `./uploads/medics/${medic.img}`;
@@ -27,7 +31,8 @@ const updateImage = async (id, rename, colection) => {
     case 'hospitals':
       const hospital = await Hospital.findById(id);
       if (!hospital) {
-        console.log('no existe usuario con es id');
+        console.log('no existe Hospital con es id');
+        removeImage(`./uploads/medics/${rename}`);
         return false;
       }
       pathold = `./uploads/hospitals/${hospital.img}`;
@@ -42,6 +47,7 @@ const updateImage = async (id, rename, colection) => {
       const user = await User.findById(id);
       if (!user) {
         console.log('no existe usuario con es id');
+        removeImage(`./uploads/medics/${rename}`);
         return false;
       }
       pathold = `./uploads/users/${user.img}`;

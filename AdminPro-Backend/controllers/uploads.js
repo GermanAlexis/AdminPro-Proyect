@@ -46,13 +46,19 @@ const uploadFile = (req, res) => {
         msg: 'no se pudo mover el archivo',
       });
     }
-
-    updateImage(id, rename, colection);
-    res.status(200).json({
-      ok: true,
-      msg: 'Archivo cargado',
-      rename,
-    });
+    const update = updateImage(id, rename, colection);
+    if (update === true) {
+      res.status(200).json({
+        ok: true,
+        msg: 'Archivo cargado',
+        rename,
+      });
+    } else {
+      res.status(401).json({
+        ok: false,
+        msg: 'Fallo al cargar',
+      });
+    }
   });
 };
 

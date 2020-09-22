@@ -22,16 +22,16 @@ router.post(
   ],
   createMedic
 );
-// router.put(
-//   '/:id',
-//   [
-//     validateJWT,
-//     check('name_medic', 'el nombre es obligatorio').not().isEmpty(),
-//     check('area_medic', 'el area es obligatorio').not().isEmpty(),
-//     validateCampus,
-//   ],
-//   updateMedic
-// );
+router.put(
+  '/:id',
+  [
+    validateJWT,
+    check('name_medic', 'el nombre es obligatorio').not().isEmpty(),
+    check('area_medic', 'el area es obligatorio').not().isEmpty(),
+    validateCampus,
+  ],
+  updateMedic
+);
 
-// router.delete('/:id', deleteMedic);
+router.delete('/:id', validateJWT, deleteMedic);
 module.exports = router;
