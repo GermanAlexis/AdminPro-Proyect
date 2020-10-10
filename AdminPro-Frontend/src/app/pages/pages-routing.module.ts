@@ -1,5 +1,6 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from '../guards/auth.guard';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
@@ -14,6 +15,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 const pagesroutes: Routes = [
     { path: 'dashboard',
       component: PagesComponent,
+      canActivate: [AuthGuard],
       children: [
              { path: '', component: DashboardComponent,
                data: { title: 'Dashboard', description: 'PAGINA PRINCIPAL ' } },
