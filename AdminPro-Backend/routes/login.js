@@ -18,7 +18,7 @@ router.post(
 router.post(
   '/google',
   [
-    check('token', 'el token debe es obligatorio').not().isEmpty(),
+    check('googleToken', 'el token debe es obligatorio').not().isEmpty(),
     validateCampus,
   ],
   googleSingIn

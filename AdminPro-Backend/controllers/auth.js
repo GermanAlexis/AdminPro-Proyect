@@ -40,62 +40,51 @@ const login = async (req, res) => {
 
 const googleSingIn = async (req, res) => {
   
-  const googleToken = req.body.googleToken
+  const googleToken = req.body.googleToken;
   try {
-    const {name, email, picture } = await googleVerify(googleToken)
-    res.status(200).json({
-      ok: true,
-      msg: 'GoogleSingIn',
-      name, email, picture
-    })
-
-    const userBD = await User.findOne({email})
-
-    if(!userBD){
-      user = new User([
-      name,
-      lastName = give_family,
-      email,
-      password = '@@',
-      img = picture,
-      google = true
-    ])
+    const { name, lastName, email, picture } = await googleVerify(googleToken);
+    const userBD = await User.findOne({ email });
+    let user;
+    if (!userBD) {
+      user = new User({
+        name,
+        lastName,
+        email, 
+        password: '@@',
+        img: picture,
+        google: true,
+      });
     } else {
-      user = userBD
-      user.google = true
+      user = userBD;
+      user.google = true;
     }
-    await user.save()
+    console.log(user);  
+    await user.save();
 
     const token = await generatorJWT(user.id);
-    res.status(200).json({
+     return res.status(200).json({
       ok: true,
       msg: 'Login Exitoso',
       token: token,
     });
 
-  } catch (error) {
-    res.status(401).json({
-      ok: false,
-      msg: 'Token Invalid',
-      
-    })
-  }
-}
+  } catch(e) {
+    throw Error(e.message);
+  } 
+};
 
 const reNewToken = async (req, res) => {
-
-  const uid = req.uid
+  const uid = req.uid;
 
   const token = await generatorJWT(uid);
 
   res.status(200).json({
     ok: true,
-    token
-  })
-
-}
+    token,
+  });
+};
 module.exports = {
   login,
   googleSingIn,
-  reNewToken
+  reNewToken,
 };
