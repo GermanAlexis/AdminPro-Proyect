@@ -50,8 +50,9 @@ export class LoginComponent implements OnInit {
     });
     this.googleInit();
   }
-  googleInit() {
-      this.userservice.logout();
+  async googleInit() {
+      await this.userservice.googleInit();
+      this.auth2 = this.userservice.auth2;
       this.attachSignIn(document.getElementById('btngoogle'));
   }
   attachSignIn(element: HTMLElement) {
@@ -81,7 +82,7 @@ export class LoginComponent implements OnInit {
     this.userservice.login(this.loginForm.value).subscribe(
       (resp: any) => {
         if (this.loginForm.get('remember').value) {
-          localStorage.setItem('email', resp.email);
+          localStorage.setItem('email', this.loginForm.get('email').value);
         } else {
           localStorage.removeItem('email');
         }

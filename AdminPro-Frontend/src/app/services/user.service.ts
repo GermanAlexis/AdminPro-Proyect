@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap, map, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
@@ -7,6 +7,8 @@ import { environment } from '../../environments/environment';
 
 import { RegisterForm } from '../interfaces/registerForm.interface';
 import { LoginForm } from '../interfaces/loginiForm.interface';
+import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 const base_url = environment.base_url;
 
@@ -16,14 +18,27 @@ declare const gapi: any;
 })
 export class UserService {
   public auth2: any;
-  constructor(private http: HttpClient) {}
+  public user: User;
+  constructor(private http: HttpClient, private router: Router, private ngzone: NgZone ) { this.googleInit(); }
 
+  googleInit() {
+    // tslint:disable-next-line: no-shadowed-variable
+    return new Promise ( resolve => {
+
+      gapi.load('auth2', () => {
+        this.auth2 = gapi.auth2.init({
+          client_id: '1052296378840-oe0k1qfjn4tgqhidjfa64jlgnlad6cbo.apps.googleusercontent.com',
+          cookiepolicy: 'single_host_origin'
+        });
+        resolve();
+      });
+    });
+  }
   logout() {
-    gapi.load('auth2', () => {
-      this.auth2 = gapi.auth2.init({
-        client_id:
-          '1052296378840-oe0k1qfjn4tgqhidjfa64jlgnlad6cbo.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
+    localStorage.removeItem('token');
+    this.auth2.signOut().then(() => {
+      this.ngzone.run(() => {
+        this.router.navigateByUrl('/login');
       });
     });
   }
@@ -35,10 +50,10 @@ export class UserService {
         'x-token': token
         }
     }).pipe(
-      tap((resp: any ) => {
+      map((resp: any ) => {
+        const { name, lastName, email, password, img = '', google, role, uid } = resp.user;
+        this.user = new User( name, lastName, email, '', google, role, img, uid );
         localStorage.setItem('token', resp.token);
-      }),
-      map( (resp: boolean) => {
         return true;
       }),
       catchError( error => of(false))

@@ -19,7 +19,6 @@ export class BreadcrumbsComponent   implements OnDestroy {
     this.titleSub$ = this.dataRote()
                        .subscribe( res => {
                         if ( this.title !== res.title) {
-                          console.log('diferente soy ');
                           meta.removeTag(`name = ${ this.title }`);
                         }
                         this.title = res.title;
