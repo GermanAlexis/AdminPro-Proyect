@@ -9,6 +9,6 @@ const router = Router();
 router.use(fileUpload());
 router.put('/:colection/:id', [validateJWT], uploadFile);
 
-router.get('/:colection/:picture', [validateJWT], downFile);
+router.get('/:colection/:picture', downFile);
 
 module.exports = router;

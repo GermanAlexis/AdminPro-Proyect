@@ -74,13 +74,14 @@ const googleSingIn = async (req, res) => {
 };
 
 const reNewToken = async (req, res) => {
-  const uid = req.uid;
-
+  const uid = req.uid.uid;
   const token = await generatorJWT(uid);
+  const user = await User.findById(uid);
 
   res.status(200).json({
     ok: true,
     token,
+    user
   });
 };
 module.exports = {

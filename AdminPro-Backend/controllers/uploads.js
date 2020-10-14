@@ -47,19 +47,13 @@ const uploadFile = (req, res) => {
       });
     }
     const update = updateImage(id, rename, colection);
-    if (update === true) {
+    
       res.status(200).json({
         ok: true,
         msg: 'Archivo cargado',
         rename,
       });
-    } else {
-      res.status(401).json({
-        ok: false,
-        msg: 'Fallo al cargar',
-      });
-    }
-  });
+    });
 };
 
 const downFile = (req, res) => {
