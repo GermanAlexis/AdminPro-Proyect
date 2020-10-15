@@ -33,7 +33,8 @@
                     <input type="email"
                            class="form-control" 
                            placeholder="email"
-                           formControlName="email">
+                           formControlName="email"
+                           [readOnly]="user.gogole">
                 </div>
             </div>
            
@@ -49,12 +50,21 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Foto del Usuario</h4>
-                
-                <img src="" alt="">
+                <div class="text-center">
+                    <img *ngIf="!imgTemp" [src]="user.pathImg" alt="user" class="img-avatar text-center">
+                    <img *ngIf="imgTemp"[src]="imgTemp" alt="user" class="img-avatar text-center">
 
-                <input type="file">
+                </div>
                 <br><br>
-                <button type="button" class="btn btn-success btn-block waves-effect waves-light m-r-10">
+
+                <input type="file"
+                        (change)="changeImage($event.target.files[0])">
+                <br><br>
+                <button type="button" 
+                        class="btn btn-success btn-block waves-effect waves-light m-r-10"
+                        [disabled]="!upImg"
+                        (click)="UpImagen()">
+                        
                     <i class="fa fa-save"></i>
                        Cambiar imagen
                   </button>
