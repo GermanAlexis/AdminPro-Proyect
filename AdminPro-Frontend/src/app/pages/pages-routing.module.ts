@@ -9,6 +9,7 @@ import { GraphicsComponent } from './graphics/graphics.component';
 import { AccountSettingComponent } from '../components/accountSetting/account-setting.component';
 import { PromiseComponent } from './promise/promise.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 
@@ -28,7 +29,9 @@ const pagesroutes: Routes = [
               { path: 'promise', component: PromiseComponent ,
               data: { title: 'Promesas', description: 'USOS DE PROMESAS ' }},
               { path: 'rxjs', component: RxjsComponent ,
-              data: { title: 'Rxjs', description: 'APLICACIONES DE RXJS' }}
+              data: { title: 'Rxjs', description: 'APLICACIONES DE RXJS' }},
+              { path: 'profile', component: ProfileComponent ,
+              data: { title: 'Perfil del Usuario', description: 'Perfil de Usuario' }}
          ]}
 ];
 

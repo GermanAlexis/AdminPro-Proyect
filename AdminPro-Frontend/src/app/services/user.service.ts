@@ -21,6 +21,13 @@ export class UserService {
   public user: User;
   constructor(private http: HttpClient, private router: Router, private ngzone: NgZone ) { this.googleInit(); }
 
+  get token(): string {
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid(): string {
+    return this.user.uid;
+  }
   googleInit() {
     // tslint:disable-next-line: no-shadowed-variable
     return new Promise ( resolve => {
@@ -43,11 +50,10 @@ export class UserService {
     });
   }
   validToken(): Observable<boolean> {
-    const token = localStorage.getItem('token') || '';
 
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
         }
     }).pipe(
       map((resp: any ) => {
@@ -62,6 +68,24 @@ export class UserService {
 
   createUser(formData: RegisterForm) {
     return this.http.post(`${base_url}/users`, formData).pipe(
+      tap((resp: any) => {
+        localStorage.setItem('token', resp.token);
+      })
+    );
+  }
+
+  updateProfile(formData: { email: string, name: string, role: string}) {
+
+    formData = {
+      ...formData,
+      role: this.user.role
+    };
+
+    return this.http.put(`${base_url}/users/${this.uid}`, formData, {
+      headers: {
+        'x-token': this.token
+        }
+    }).pipe(
       tap((resp: any) => {
         localStorage.setItem('token', resp.token);
       })

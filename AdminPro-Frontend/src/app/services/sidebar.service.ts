@@ -14,6 +14,7 @@ export class SidebarService {
         { subtitle: 'Graficas', url: 'graphics'},
         { subtitle: 'Promesas', url: 'promise'},
         { subtitle: 'RxJs', url: 'rxjs'},
+        { subtitle: 'Perfil de usuario', url: 'profile'},
       ]
     }
   ];
