@@ -58,7 +58,6 @@ const googleSingIn = async (req, res) => {
       user = userBD;
       user.google = true;
     }
-    console.log(user);  
     await user.save();
 
     const token = await generatorJWT(user.id);

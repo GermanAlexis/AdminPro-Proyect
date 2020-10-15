@@ -72,7 +72,14 @@ const updateUser = async (req, res) => {
         });
       }
     }
-    campus.email = email;
+    if (!userBD.google) {
+      campus.email = email;
+    } else if (userBD.email !== email) {
+        res.status(404).json({
+        ok: false,
+        msg: 'el email Google NO se permite cambiar',
+      });
+    }
     const userUpdate = await User.findByIdAndUpdate(uid, campus, { new: true });
 
     res.status(200).json({
