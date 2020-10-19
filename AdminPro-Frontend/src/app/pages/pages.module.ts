@@ -15,6 +15,9 @@ import { GraphicsComponent } from './graphics/graphics.component';
 import { PromiseComponent } from './promise/promise.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './mantenimiento/user/user.component';
+import { MedicComponent } from './mantenimiento/medic/medic.component';
+import { HospitalComponent } from './mantenimiento/hospital/hospital.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,9 @@ import { ProfileComponent } from './profile/profile.component';
     PromiseComponent,
     RxjsComponent,
     ProfileComponent,
+    UserComponent,
+    MedicComponent,
+    HospitalComponent,
   ],
   imports: [
     CommonModule,

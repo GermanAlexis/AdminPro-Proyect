@@ -10,6 +10,9 @@ import { AccountSettingComponent } from '../components/accountSetting/account-se
 import { PromiseComponent } from './promise/promise.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HospitalComponent } from './mantenimiento/hospital/hospital.component';
+import { MedicComponent } from './mantenimiento/medic/medic.component';
+import { UserComponent } from './mantenimiento/user/user.component';
 
 
 
@@ -31,7 +34,14 @@ const pagesroutes: Routes = [
               { path: 'rxjs', component: RxjsComponent ,
               data: { title: 'Rxjs', description: 'APLICACIONES DE RXJS' }},
               { path: 'profile', component: ProfileComponent ,
-              data: { title: 'Perfil del Usuario', description: 'Perfil de Usuario' }}
+              data: { title: 'Perfil del Usuario', description: 'Perfil de Usuario' }},
+              // manttenimeinto
+              { path: 'user', component: UserComponent ,
+              data: { title: 'Manejo del Usuario', description: 'CRUD de Usuario' }},
+              { path: 'medic', component: MedicComponent ,
+              data: { title: 'Manejo del Medico', description: 'CRUD de Usuario' }},
+              { path: 'hoapital', component: HospitalComponent ,
+              data: { title: 'Manejo del Hospital', description: 'CRUD de Hospital' }}
          ]}
 ];
 
