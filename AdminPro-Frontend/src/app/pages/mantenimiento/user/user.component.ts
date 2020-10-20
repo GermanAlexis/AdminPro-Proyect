@@ -13,16 +13,20 @@ export class UserComponent implements OnInit {
   public totalUser: number;
   public users: User[] = [];
   public current: number;
+  public loadAlert = true;
+
   constructor( private userservice: UserService) { }
 
   ngOnInit(): void {
     this.loadUsers();
   }
   loadUsers() {
+    this.loadAlert = true;
     this.userservice.loadUser(0).subscribe(
       ({total, users}) => {
         this.users = users;
         this.totalUser = total;
+        this.loadAlert = false;
       });
   }
   pageCurrent(valor: number) {

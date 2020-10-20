@@ -55,6 +55,7 @@ export class UserService {
       });
     });
   }
+
   login(formData: LoginForm) {
     return this.http.post(`${base_url}/login`, formData).pipe(
       tap((resp: any) => {
@@ -131,6 +132,18 @@ export class UserService {
 
   loadUser(desde: number = 0) {
     const url = `${base_url}/users?desde=${desde}`;
-    return this.http.get<LoadUser>(url, this.headers);
+    return this.http.get<LoadUser>(url, this.headers)
+        .pipe(
+          map(
+            resp => {
+                const users = resp.users.map(
+                  user => new User( user.name, user.lastName, user.email, '', user.google, user.role, user.img, user.uid )
+                  );
+                return {
+                    total: resp.total,
+                    users
+                  };
+              })
+        );
   }
 }

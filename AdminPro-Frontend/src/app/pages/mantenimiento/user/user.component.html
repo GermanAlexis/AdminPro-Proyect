@@ -8,7 +8,8 @@
     </div>
     </div>
     </div>
-    <div class="row text-center">
+    <div class="row text-center fastIn fast"
+    *ngIf="loadAlert">
     <div class="col-12">
         <div class="alert alert-info">
         <h4 class="alert-heading">Cargando</h4>
@@ -17,7 +18,8 @@
         </div>
     </div>
     </div>
-    <div class="row">
+    <div class="row fastIn fast" 
+         *ngIf="!loadAlert">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
@@ -27,20 +29,20 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th  class="text-center">Avatar</th>
+                                    <th  class="text-center w100">Avatar</th>
                                     <th class="text-center">Nombre</th>
                                     <th class="text-center">Correo</th>
-                                    <th class="text-center">Role</th>
-                                    <th class="text-center">Auth</th>
-                                    <th  class="text-center">Acciónes</th>
+                                    <th class="text-center w100">Role</th>
+                                    <th class="text-center w100">Auth</th>
+                                    <th  class="text-center w100">Acciónes</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                               
-                               
                                     <tr *ngFor="let user of users">
-                                        <td>xxx</td>
+                                        <td class="text-center">
+                                            <img [src]="user.pathImg" alt="avatar" class="avatar">
+                                        </td>
                                         <td>{{ user.name }} {{ user.lastName}}</td>
                                         <td>{{ user.email}}</td>
                                         <td>{{ user.role }}</td>
@@ -48,7 +50,7 @@
                                             <span *ngIf="user.google" class="label label-danger">google</span>
                                             <span *ngIf="!user.google" class="label label-info">Normal</span>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
                                             <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
                                         </td>
