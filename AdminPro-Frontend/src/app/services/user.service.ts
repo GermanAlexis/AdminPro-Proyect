@@ -118,16 +118,17 @@ export class UserService {
     };
 
     return this.http
-      .put(`${base_url}/users/${this.uid}`, formData, {
-        headers: {
-          'x-token': this.token,
-        },
-      })
+      .put(`${base_url}/users/${this.uid}`, formData, this.headers)
       .pipe(
         tap((resp: any) => {
           localStorage.setItem('token', resp.token);
         })
       );
+  }
+
+  deleteUser(user: User) {
+    const url = `${ base_url }/users/${ user.uid }`;
+    return this.http.delete(url, this.headers);
   }
 
   loadUser(desde: number = 0) {
@@ -146,4 +147,10 @@ export class UserService {
               })
         );
   }
+
+  changeRole( user: User) {
+    return this.http
+    .put(`${base_url}/users/${user.uid}`, user, this.headers);
+  }
+
 }

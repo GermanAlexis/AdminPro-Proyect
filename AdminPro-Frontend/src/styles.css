@@ -20,7 +20,7 @@
 }
 
 .w140 {
-    width: 140px;
+    width: 200px;
 }
 
 .avatar {
@@ -28,11 +28,11 @@
     width: 30px;
 }
 
-.oculto {
+.hiddenModal {
     display: none;
 }
 
-.fondo-modal-imagen {
+.background-modal-image {
     background-color: rgba(0, 0, 0, 0.4);
     left: 0px;
     height: 100%;

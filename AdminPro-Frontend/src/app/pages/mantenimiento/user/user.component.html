@@ -1,12 +1,14 @@
     <div class="row">
-    <div class="col-12">
-    <div class="card">
-    <div class="card-body">
-        <input type="text"
-            class="form-control" />
-    </div>
-    </div>
-    </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <input type="text"
+                        class="form-control" 
+                        (keyup)="searchCollection(txtWord.value)"
+                        #txtWord/>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row text-center fastIn fast"
     *ngIf="loadAlert">
@@ -32,36 +34,44 @@
                                     <th  class="text-center w100">Avatar</th>
                                     <th class="text-center">Nombre</th>
                                     <th class="text-center">Correo</th>
-                                    <th class="text-center w100">Role</th>
+                                    <th class="text-center w140">Role</th>
                                     <th class="text-center w100">Auth</th>
                                     <th  class="text-center w100">Acciónes</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                     <tr *ngFor="let user of users">
                                         <td class="text-center">
-                                            <img [src]="user.pathImg" alt="avatar" class="avatar">
+                                            <img [src]="user.pathImg"
+                                                 alt="avatar" 
+                                                 class="avatar cursor" 
+                                                (click)="openModal(user)">
                                         </td>
                                         <td>{{ user.name }} {{ user.lastName}}</td>
                                         <td>{{ user.email}}</td>
-                                        <td>{{ user.role }}</td>
+                                        <td>
+                                            <select class="form-control custom-select"
+                                                    [(ngModel)]="user.role"
+                                                    (change)="changeRole(user)">
+                                                <option value="Admin">{{ user.role }}</option>
+                                                <option value="User_Mortal">Mortal</option>
+                                            </select>
+                                        </td>
                                         <td>
                                             <span *ngIf="user.google" class="label label-danger">google</span>
                                             <span *ngIf="!user.google" class="label label-info">Normal</span>
                                         </td>
                                         <td class="text-center">
                                             <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                            <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                            <a (click)="deleteUser(user)" data-toggle="tooltip" data-original-title="Eliminar"> <i class="fa fa-close text-danger"></i> </a>
                                         </td>
                                     </tr>
-                                
                             </tbody>
                         </table>
-                        <div class="text-center">
-                        <button (click)="pageCurrent(-5)" class="btn btn-secondary">anterior</button> &nbsp; 
-                        <button (click)="pageCurrent(5)" class="btn btn-secondary">Siguiente</button>
-                    </div>
+                        <div class="text-center" *ngIf="txtWord.value.length === 0">
+                            <button (click)="pageCurrent(-5)" class="btn btn-secondary">anterior</button> &nbsp; 
+                            <button (click)="pageCurrent(5)" class="btn btn-secondary">Siguiente</button>
+                        </div>
                     </div>
                 </div>
             </div>
