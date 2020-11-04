@@ -43,7 +43,7 @@ const getColection = async (req, res) => {
           .populate('user', 'name img');
         break;
       case 'users':
-        data = await User.find({ name: regex }, 'name lastName email');
+        data = await User.find( { name: regex  } , 'name lastName email img' );
         break;
       case 'hospitals':
         data = await Hospital.find({ name_hospital: regex }).populate(
@@ -65,6 +65,7 @@ const getColection = async (req, res) => {
       result: data,
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       ok: false,
       msg: 'Hable con el administrador',

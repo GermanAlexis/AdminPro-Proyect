@@ -14,7 +14,6 @@ const dbconnetion = async () => {
         throw new Error(' Error al iniciar1 BD');
     }
 }
-70752096
 module.exports = {
     dbconnetion
 }
