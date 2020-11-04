@@ -40,7 +40,7 @@ const pagesroutes: Routes = [
               data: { title: 'Manejo del Usuario', description: 'CRUD de Usuario' }},
               { path: 'medic', component: MedicComponent ,
               data: { title: 'Manejo del Medico', description: 'CRUD de Usuario' }},
-              { path: 'hoapital', component: HospitalComponent ,
+              { path: 'hospital', component: HospitalComponent ,
               data: { title: 'Manejo del Hospital', description: 'CRUD de Hospital' }}
          ]}
 ];
