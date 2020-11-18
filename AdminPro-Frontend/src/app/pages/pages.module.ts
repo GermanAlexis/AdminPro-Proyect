@@ -18,6 +18,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UserComponent } from './mantenimiento/user/user.component';
 import { MedicComponent } from './mantenimiento/medic/medic.component';
 import { HospitalComponent } from './mantenimiento/hospital/hospital.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { HospitalComponent } from './mantenimiento/hospital/hospital.component';
     FormsModule,
     ReactiveFormsModule,
     ComponentModule,
+    PipesModule
   ],
   exports: [DashboardComponent, ProgressbarComponent],
 })
