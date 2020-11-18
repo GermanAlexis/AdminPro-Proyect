@@ -17,7 +17,7 @@ const getHospitals = async (req, res) => {
 };
 
 const createHospital = async (req, res) => {
-  const uid = req.id;
+  const uid = req.uid.uid;
   const hospital = new Hospital({
     user: uid,
     ...req.body,
@@ -36,9 +36,10 @@ const createHospital = async (req, res) => {
     });
   }
 };
+
 const updateHospital = async (req, res) => {
   const id = req.params.id;
-  const uid = req.uid;
+  const uid = req.uid.uid;
   try {
     const hospital = await Hospital.findById(id);
 
@@ -59,7 +60,7 @@ const updateHospital = async (req, res) => {
     });
     res.status(200).json({
       ok: true,
-      mgs: 'Hay un hospital',
+      mgs: 'Se actualizo con exito el hospital',
       hospital: updateHospital,
     });
   } catch (error) {
