@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">INFORMACION DEL MEDICO</h4>
+            <h6 class="card-subtitle">DETALLES</h6>
+            <form class="form p-t-20"
+                  [formGroup]="medicForm"
+                  (submit)="saveMedic()" 
+                  >
+                
+                <div class="form-group"
+                     *ngIf="medicSelected">
+                    <label for="exampleInputpwd2">Foto del Medico</label>
+                    <div class="input-group ">
+                        <img [src]="medicSelected.img | image:'medics'" class="img-avatar cursor" alt="medico" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputuname2">NOMBRE DEL MEDICO</label>
+                     
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" 
+                                class="form-control" 
+                                id="exampleInputuname2" 
+                                placeholder="NOMBRE DEL MEDICO" 
+                                formControlName="name_medic">
+                            </div>
+                        </div>    
+                    
+                <div class="form-group">
+                    <label for="exampleInputname3">HOSPITAL</label>
+                    <div class="input-group">
+                        <select class="form-control"
+                                formControlName="hospital"        
+                        >
+                            <option value=""> Seleccione Hospital</option>
+                            <option *ngFor="let hospital of hospitales" 
+                                    [value]="hospital.hid">{{ hospital.name_hospital}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputname4">Area de labor</label>
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="ti-star"></i></div>
+                        <input  type="input" 
+                                class="form-control"
+                                id="exampleInputpwd2"
+                                placeholder="Area de labor"
+                                formControlName="area_medic">
+                    </div>
+                </div>
+                <div class="text-left">
+                    <button type="submit" 
+                            [disabled]="medicForm.invalid"
+                            class="btn btn-success waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i> Guardar Medico
+                    </button>
+                    <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+                </div>
+            </form>
+        </div>
+        </div>    
+    </div>
+    <div class="col animated fastIn fast" *ngIf="hospitalSelected">
+        <div class="card" >
+        <div class="card-body">
+            <h4 class="card-title">{{ hospitalSelected.name_hospital}}</h4>
+            <h6 class="card-subtitle">INFORMACION DEL HOSPITA SELECCIONADO</h6>
+            <img [src]=" hospitalSelected.img | image : 'hospitals'" 
+                 class="img-thumbnail" 
+                 alt="medico" />
+
+        </div>
+        </div>
+    </div>
+</div>

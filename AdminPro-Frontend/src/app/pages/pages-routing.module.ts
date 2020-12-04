@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HospitalComponent } from './mantenimiento/hospital/hospital.component';
 import { MedicComponent } from './mantenimiento/medic/medic.component';
 import { UserComponent } from './mantenimiento/user/user.component';
+import { MedicEditComponent } from './mantenimiento/medic/medic-edit.component';
 
 
 
@@ -36,12 +37,14 @@ const pagesroutes: Routes = [
               { path: 'profile', component: ProfileComponent ,
               data: { title: 'Perfil del Usuario', description: 'Perfil de Usuario' }},
               // manttenimeinto
-              { path: 'user', component: UserComponent ,
-              data: { title: 'Manejo del Usuario', description: 'CRUD de Usuario' }},
-              { path: 'medic', component: MedicComponent ,
-              data: { title: 'Manejo del Medico', description: 'CRUD de Usuario' }},
-              { path: 'hospital', component: HospitalComponent ,
-              data: { title: 'Manejo del Hospital', description: 'CRUD de Hospital' }}
+              { path: 'users', component: UserComponent ,
+              data: { title: 'Manejo del Usuario', description: 'Mantenimiento de Usuario' }},
+              { path: 'medics', component: MedicComponent ,
+              data: { title: 'Manejo del Medico', description: 'Mantenimiento de Medico' }},
+              { path: 'medic/:id', component: MedicEditComponent ,
+              data: { title: 'Manejo del Medico', description: 'Mantenimiento de Medico' }},
+              { path: 'hospitals', component: HospitalComponent ,
+              data: { title: 'Manejo del Hospital', description: 'Mantenimiento de Hospital' }}
          ]}
 ];
 

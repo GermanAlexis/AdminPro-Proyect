@@ -1,25 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { HospitalService } from '../../../services/hospital.service';
-import { Hospital } from '../../../models/hospital.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { delay } from 'rxjs/operators';
 import Swal from 'sweetalert2';
+
+import { ModalImageService } from '../../../services/modal-image.service';
+import { HospitalService } from '../../../services/hospital.service';
+import { SearchService } from '../../../services/search.service';
+
+import { Hospital } from '../../../models/hospital.model';
 
 @Component({
   selector: 'app-hospital',
   templateUrl: './hospital.component.html',
   styles: []
 })
-export class HospitalComponent implements OnInit {
+export class HospitalComponent implements OnInit, OnDestroy {
 
   Hospitales: Hospital[] = [];
+  imgSubs: Subscription;
   loading = true;
 
-  // tslint:disable-next-line: variable-name
-  name_hospital = 'Hospital general';
-
-  constructor( private hospitalService: HospitalService) { }
+   constructor( private hospitalService: HospitalService,
+                private modalImageService: ModalImageService,
+                private searchService: SearchService) { }
 
   ngOnInit(): void {
     this.loadHospitals();
+    this.imgSubs = this.modalImageService.newImage
+    .pipe(
+      delay (100)
+      ).subscribe( img => this.loadHospitals() );
+  }
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
+
+  searchHospital( termino: string) {
+    if ( termino.length > 0) {
+      this.searchService.searchCollection('hospitals', termino).subscribe( (resp: Hospital[]) => { this.Hospitales = resp; } );
+    } else { this.loadHospitals(); }
   }
   loadHospitals() {
     this.loading = true;
@@ -32,7 +51,7 @@ export class HospitalComponent implements OnInit {
   }
 
   async openSweetHospital() {
-    const { value  } = await Swal.fire<string>({
+    const { value = '' } = await Swal.fire<string>({
       title: 'Crear Hospital',
       text: 'Escriba el nombre del hospital',
       input: 'text',
@@ -60,5 +79,10 @@ export class HospitalComponent implements OnInit {
       this.loadHospitals();
     });
   }
+
+  openModal(hospital: Hospital) {
+    this.modalImageService.openModal('hospitals', hospital.hid, hospital.img);
+  }
+
 }
 

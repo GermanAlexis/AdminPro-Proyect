@@ -1,6 +1,6 @@
 
 // tslint:disable-next-line: class-name
-interface _HosptialUser {
+interface _HospitalUser {
     _id: string;
     name: string;
     lastName: string;
@@ -13,7 +13,7 @@ export class Hospital {
         public name_hospital: string,
         public hid?: string,
         public img?: string,
-        public user?: _HosptialUser,
+        public user?: _HospitalUser,
 
     ) {}
 }

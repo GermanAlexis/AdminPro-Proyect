@@ -19,6 +19,7 @@ import { UserComponent } from './mantenimiento/user/user.component';
 import { MedicComponent } from './mantenimiento/medic/medic.component';
 import { HospitalComponent } from './mantenimiento/hospital/hospital.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { MedicEditComponent } from './mantenimiento/medic/medic-edit.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PipesModule } from '../pipes/pipes.module';
     UserComponent,
     MedicComponent,
     HospitalComponent,
+    MedicEditComponent,
   ],
   imports: [
     CommonModule,

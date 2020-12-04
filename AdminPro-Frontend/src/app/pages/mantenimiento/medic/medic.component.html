@@ -1,61 +1,71 @@
 <div class="row">
     <div class="col-12">
-    <div class="card">
-    <div class="card-body">
-        <input type="text"
-            class="form-control" />
-    </div>
-    </div>
-    </div>
-    </div>
-    <div class="row text-center">
-    <div class="col-12">
-        <div class="alert alert-info">
-        <h4 class="alert-heading">Cargando</h4>
-        <i class="fa fa-spin fa-refresh"></i>
-        <p class="mb-0">Por favor esperar</p>
+        <div class="card">
+            <div class="card-body">
+                <input type="text" 
+                class="form-control" 
+                (keyup)="searchMedic(txtTermino.value)
+                "#txtTermino/>
+            </div>
         </div>
     </div>
+</div>
+<div *ngIf="loading" class="row text-center">
+    <div class="col-12">
+        <div class="alert alert-info">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh"></i>
+            <p class="mb-0">Por favor esperar</p>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Tabla de Usuario</h4>
-                    <h6 class="card-subtitle">Registro de Todos los Usuarios</h6>
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th  class="text-center">Avatar</th>
-                                    <th class="text-center">Nombre</th>
-                                    <th class="text-center">Correo</th>
-                                    <th class="text-center">Role</th>
-                                    <th class="text-center">Auth</th>
-                                    <th  class="text-center">Acciónes</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <td><tr></tr></td>
-                                <td><tr></tr></td>
-                                <td><tr></tr></td>
-                                <td><tr></tr></td>
-                                <td><tr></tr></td>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8">
+                        <h4 class="card-title">Tabla de Medico ({{ medics.length }})</h4>
+                        <h6 class="card-subtitle">Registro de Todos los Medicos</h6>
+                    </div>
+                    <div class="col-4">
+                        <a routerLink="/dashboard/medic/nuevo" class="btn btn-primary btn-block" ><i class="fa fa-user"> </i> Crear Medico</a>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead *ngIf="!loading">
+                            <tr>
+                                <th class="text-center w100">Avatar</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Area</th>
+                                <th class="text-center">Acciónes</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <tr *ngFor="let medic of medics">
                                 <td>
-                                    <tr>
-                                        <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                        <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
-                                    </tr>
+                                    <img [src]=" medic.img | image: 'medics' "
+                                         [alt]="medic.name_medic" 
+                                         class="avatar cursor"
+                                        (click)="openModal(medic)"/>
                                 </td>
-                            </tbody>
-                        </table>
-                        <div class="text-center">
-                        <button class="btn btn-secondary">anterior</button> &nbsp;
-                        <button class="btn btn-secondary">Siguiente</button>
-                    </div>
-                    </div>
+                                <td>{{ medic.name_medic }}</td>
+                                <td>{{ medic.area_medic }}</td>
+                                <td>
+                                    <a [routerLink]="['/dashboard/medic', medic.mid ]" 
+                                       data-toggle="tooltip" 
+                                       data-original-title="Edit"> <i
+                                        class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a (click)="deleteMedic(medic)" data-toggle="tooltip" data-original-title="Close"> <i
+                                            class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                   
                 </div>
             </div>
         </div>
     </div>
+</div>

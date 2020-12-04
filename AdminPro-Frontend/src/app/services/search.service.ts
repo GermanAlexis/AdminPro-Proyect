@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+
 import { environment } from 'src/environments/environment';
+
 import { User } from '../models/user.model';
+import { Hospital } from '../models/hospital.model';
+import { Medic } from '../models/medic.model';
 
 const base_url = environment.base_url;
 @Injectable({
@@ -24,10 +28,17 @@ export class SearchService {
     };
   }
 
-  private tranformarData( resultado: any[]): User[] {
+  private tranformarDataUsers( resultado: any[]): User[] {
     return resultado.map(
       user => new User( user.name, user.lastName, user.email, '', user.google, user.role, user.img, user.uid )
     );
+  }
+
+  private tranformarDataHospitals( resultado: any[]): Hospital[] {
+    return resultado;
+  }
+  private tranformarDataMedics( resultado: any[]): Medic[] {
+    return resultado;
   }
   searchCollection( type: 'users'|'medics'|'hospitals', word: string ) {
     const url = `${ base_url }/quests/${type}/${word}`;
@@ -36,7 +47,11 @@ export class SearchService {
         map( (resp: any ) => {
           switch (type) {
             case 'users':
-                return this.tranformarData(resp.result);
+                return this.tranformarDataUsers(resp.result);
+            case 'hospitals':
+                  return this.tranformarDataHospitals(resp.result);
+            case 'medics':
+                    return this.tranformarDataMedics(resp.result);
             default:
               return [];
           }

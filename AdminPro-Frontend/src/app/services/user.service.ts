@@ -67,7 +67,6 @@ export class UserService {
   loginGoogle(googleToken) {
     return this.http.post(`${base_url}/login/google`, { googleToken }).pipe(
       tap((resp: any) => {
-        console.log(resp);
         localStorage.setItem('token', resp.token);
       })
     );
